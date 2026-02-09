@@ -1,0 +1,81 @@
+# BMAD Workflow Status (Compatibility Template)
+# Generated: {{TIMESTAMP}}
+# Project: {{PROJECT_NAME}}
+
+project_name: "{{PROJECT_NAME}}"
+project_type: "{{PROJECT_TYPE}}"
+project_level: {{PROJECT_LEVEL}}
+last_updated: "{{TIMESTAMP}}"
+
+workflow_status:
+  - name: product_brief
+    phase: 1
+    status: "optional"
+    description: "Create product brief"
+    intent: "bmad:product-brief"
+
+  - name: brainstorm
+    phase: 1
+    status: "optional"
+    description: "Explore ideas"
+    intent: "bmad:brainstorm"
+
+  - name: research
+    phase: 1
+    status: "optional"
+    description: "Run discovery research"
+    intent: "bmad:research"
+
+  - name: prd
+    phase: 2
+    status: "{{PRD_STATUS}}"
+    description: "Create PRD"
+    intent: "bmad:prd"
+
+  - name: tech_spec
+    phase: 2
+    status: "{{TECH_SPEC_STATUS}}"
+    description: "Create technical spec"
+    intent: "bmad:tech-spec"
+
+  - name: ux_design
+    phase: 2
+    status: "optional"
+    description: "Create UX design"
+    intent: "bmad:ux-design"
+
+  - name: architecture
+    phase: 3
+    status: "{{ARCHITECTURE_STATUS}}"
+    description: "Create architecture"
+    intent: "bmad:architecture"
+
+  - name: gate_check
+    phase: 3
+    status: "optional"
+    description: "Run gate check"
+    intent: "bmad:gate-check"
+
+  - name: sprint_planning
+    phase: 4
+    status: "required"
+    description: "Plan sprint"
+    intent: "bmad:sprint-plan"
+
+  - name: create_story
+    phase: 4
+    status: "conditional"
+    description: "Create story"
+    intent: "bmad:create-story"
+
+  - name: dev_story
+    phase: 4
+    status: "conditional"
+    description: "Implement story"
+    intent: "bmad:dev-story"
+
+  - name: code_review
+    phase: 4
+    status: "optional"
+    description: "Review code"
+    intent: "bmad:code-review"

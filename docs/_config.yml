@@ -1,0 +1,57 @@
+# Site settings
+title: "BMAD for OpenAI Codex"
+description: "Codex-first BMAD skills with intent-based workflows and YAML state management."
+baseurl: "/codex-bmad-skills"
+url: "https://xmm.github.io"
+
+# SEO and social
+twitter:
+  username: bmadmethod
+  card: summary_large_image
+
+social:
+  name: BMAD for OpenAI Codex
+  links:
+    - https://github.com/YOUR-USERNAME/codex-bmad-skills
+    - https://github.com/bmad-code-org/BMAD-METHOD
+
+# Author
+author:
+  name: "BMAD Method Community"
+  url: "https://github.com/bmad-code-org/BMAD-METHOD"
+
+# Build settings
+markdown: kramdown
+theme: minima
+highlighter: rouge
+
+# Header navigation
+header_pages:
+  - getting-started.md
+  - codex-skills.md
+  - codex-workflows.md
+  - troubleshooting.md
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# SEO defaults
+lang: en_US
+logo: /assets/images/bmad-logo.png
+
+# Keywords for SEO
+keywords:
+  - OpenAI Codex
+  - BMAD Method
+  - AI-assisted development
+  - skills
