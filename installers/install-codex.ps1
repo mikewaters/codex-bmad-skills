@@ -1,13 +1,6 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory = $true)]
-    [ValidateSet("global", "local")]
-    [string]$Scope,
-
-    [Parameter(Mandatory = $true)]
-    [string]$Dest,
-
-    [string]$ProjectRoot = (Get-Location).Path,
+    [string]$Dest = (Join-Path $HOME ".agents/skills"),
 
     [switch]$Force,
     [switch]$DryRun
@@ -101,26 +94,4 @@ foreach ($Skill in $SkillDirs) {
     $Installed++
 }
 
-if ($Scope -eq "local") {
-    $TemplatePath = Join-Path $RepoRoot "templates/project-AGENTS.template.md"
-    $ProjectAgentsPath = Join-Path $ProjectRoot "AGENTS.md"
-
-    if (Test-Path $TemplatePath) {
-        if ((Test-Path $ProjectAgentsPath) -and (-not $Force)) {
-            Write-Warn "AGENTS.md already exists, skipping: $ProjectAgentsPath"
-        }
-        elseif ($DryRun) {
-            Write-Info "Would write local AGENTS.md -> $ProjectAgentsPath"
-        }
-        else {
-            New-Item -ItemType Directory -Force -Path $ProjectRoot | Out-Null
-            Copy-Item -Path $TemplatePath -Destination $ProjectAgentsPath -Force
-            Write-Ok "Wrote local AGENTS.md"
-        }
-    }
-    else {
-        Write-Warn "Template not found: $TemplatePath"
-    }
-}
-
-Write-Ok "Done. scope=$Scope source=$SkillsSource dest=$Dest installed=$Installed skipped=$Skipped"
+Write-Ok "Done. source=$SkillsSource dest=$Dest installed=$Installed skipped=$Skipped"

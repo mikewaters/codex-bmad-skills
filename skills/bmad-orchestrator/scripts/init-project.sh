@@ -181,7 +181,7 @@ render_template "$PROJECT_TEMPLATE" "$PROJECT_CONFIG_OUT"
 render_template "$WORKFLOW_TEMPLATE" "$WORKFLOW_OUT"
 render_template "$SPRINT_TEMPLATE" "$SPRINT_OUT"
 
-PROJECT_AGENTS_TEMPLATE="$REPO_ROOT/templates/project-AGENTS.template.md"
+PROJECT_AGENTS_TEMPLATE="$ORCHESTRATOR_ROOT/templates/project-AGENTS.template.md"
 PROJECT_AGENTS_OUT="$PROJECT_ROOT/AGENTS.md"
 if [[ -f "$PROJECT_AGENTS_TEMPLATE" ]]; then
   if [[ ! -f "$PROJECT_AGENTS_OUT" || "$FORCE" -eq 1 ]]; then

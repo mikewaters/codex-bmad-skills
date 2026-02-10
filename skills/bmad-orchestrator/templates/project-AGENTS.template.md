@@ -30,13 +30,8 @@ Use these prompts to trigger BMAD flows:
 
 Read language settings from `bmad/project.yaml`:
 
-- `language.communication_language` for assistant chat responses.
-- `language.document_output_language` for generated project artifacts under `docs/`.
-
-Fallback behavior:
-
-- If `language.document_output_language` is missing, use `language.communication_language`.
-- If both are missing, use English.
+- `language.communication_language` for assistant chat responses  with `English` fallback.
+- `language.document_output_language` for generated project artifacts under `docs/` with `English` fallback.
 
 ## Editing Rule
 

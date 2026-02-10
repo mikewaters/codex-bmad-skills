@@ -6,14 +6,10 @@ usage() {
 Install BMAD skills for OpenAI Codex.
 
 Usage:
-  ./installers/install-codex.sh --scope global|local --dest <path> [--project-root <path>] [--force] [--dry-run]
-
-Required:
-  --scope         global or local
-  --dest          destination skills directory (for example ~/.agents/skills or ./.agents/skills)
+  ./installers/install-codex.sh [--dest <path>] [--force] [--dry-run]
 
 Optional:
-  --project-root  project root for local scope (default: current directory)
+  --dest          destination skills directory (default: $HOME/.agents/skills)
   --force         overwrite existing installed skill directories
   --dry-run       print operations without copying files
   -h, --help      show this help
@@ -55,27 +51,15 @@ check_runtime_requirements() {
   log OK "Runtime check: ${yq_version:-yq detected}, ${python_version:-$PYTHON_BIN detected}"
 }
 
-SCOPE=""
-DEST=""
-PROJECT_ROOT=""
+DEST="${HOME}/.agents/skills"
 FORCE=0
 DRY_RUN=0
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --scope)
-      [[ $# -ge 2 ]] || die "Missing value for --scope"
-      SCOPE="$2"
-      shift 2
-      ;;
     --dest)
       [[ $# -ge 2 ]] || die "Missing value for --dest"
       DEST="$2"
-      shift 2
-      ;;
-    --project-root)
-      [[ $# -ge 2 ]] || die "Missing value for --project-root"
-      PROJECT_ROOT="$2"
       shift 2
       ;;
     --force)
@@ -95,13 +79,6 @@ while [[ $# -gt 0 ]]; do
       ;;
   esac
 done
-
-[[ "$SCOPE" == "global" || "$SCOPE" == "local" ]] || die "--scope must be global or local"
-[[ -n "$DEST" ]] || die "--dest is required"
-
-if [[ -z "$PROJECT_ROOT" ]]; then
-  PROJECT_ROOT="$(pwd)"
-fi
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 check_runtime_requirements
@@ -158,23 +135,4 @@ for skill_dir in "${SKILL_DIRS[@]}"; do
   INSTALLED=$((INSTALLED + 1))
 done
 
-if [[ "$SCOPE" == "local" ]]; then
-  template="$REPO_ROOT/templates/project-AGENTS.template.md"
-  project_agents="$PROJECT_ROOT/AGENTS.md"
-
-  if [[ -f "$template" ]]; then
-    if [[ -f "$project_agents" && "$FORCE" -ne 1 ]]; then
-      log WARN "AGENTS.md already exists, skipping: $project_agents"
-    elif [[ "$DRY_RUN" -eq 1 ]]; then
-      log INFO "Would write local AGENTS.md -> $project_agents"
-    else
-      mkdir -p "$PROJECT_ROOT"
-      cp "$template" "$project_agents"
-      log OK "Wrote local AGENTS.md"
-    fi
-  else
-    log WARN "Template not found: $template"
-  fi
-fi
-
-log OK "Done. scope=$SCOPE source=$SOURCE_ROOT dest=$DEST installed=$INSTALLED skipped=$SKIPPED"
+log OK "Done. source=$SOURCE_ROOT dest=$DEST installed=$INSTALLED skipped=$SKIPPED"
