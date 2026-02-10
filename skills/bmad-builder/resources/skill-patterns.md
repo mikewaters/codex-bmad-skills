@@ -11,11 +11,18 @@ Required sections in `SKILL.md`:
 - Trigger Intents
 - Workflow Variants
 - Inputs
+- Language Guard (Mandatory)
+- Mandatory Reference Load
 - Output Contract
 - Script Selection
 - Template Map
 - Reference Map
 - Quality Gates
+
+Every BMAD skill must include `Language Guard (Mandatory)` with explicit separation:
+
+- chat language: resolve from `language.communication_language` in `bmad/project.yaml` with `English` fallback
+- docs language: resolve from `language.document_output_language` in `bmad/project.yaml` with `English` fallback
 
 ## Pattern 2: Progressive Disclosure
 

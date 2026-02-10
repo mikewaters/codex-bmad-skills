@@ -24,6 +24,44 @@ allowed-tools: {{allowed_tools}}
 3. **{{principle_3_name}}** - {{principle_3_description}}
 4. **{{principle_4_name}}** - {{principle_4_description}}
 
+## Inputs
+
+- `bmad/project.yaml` if available
+- existing BMAD artifacts relevant to the selected workflow
+- user constraints, assumptions, and target outcomes
+
+## Language Guard (Mandatory)
+
+Enforce language selection separately for chat responses and generated artifacts.
+
+Chat language (`communication_language`) fallback order:
+
+1. `language.communication_language` from `bmad/project.yaml`
+2. `English`
+
+Rules for chat responses:
+
+- Use the resolved chat language for all assistant responses (questions, status updates, summaries, and handoff notes).
+- Do not switch chat language unless the user explicitly requests a different language in the current thread.
+
+Artifact language (`document_output_language`) fallback order:
+
+1. `language.document_output_language` from `bmad/project.yaml`
+2. `English`
+
+Rules for generated artifacts:
+
+- Use the resolved artifact language for all generated BMAD documents and structured artifacts.
+- write prose and field values in the resolved document language
+- avoid mixed-language requirement clauses with English modal verbs (for example, `System shall` followed by non-English text)
+- allow English acronyms/abbreviations in non-English sentences (for example, `API`, `SLA`, `KPI`, `OAuth`, `WCAG`)
+- Keep code snippets, CLI commands, file paths, and identifiers in their original technical form.
+
+## Mandatory Reference Load
+
+Before executing any workflow variant, read `REFERENCE.md` first.
+Treat `REFERENCE.md` as required context, then load only relevant supporting files.
+
 ## {{Workflow_Category_1}}
 
 ### {{Workflow_1_Name}}

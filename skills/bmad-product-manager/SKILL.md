@@ -33,21 +33,34 @@ Decision rule:
 - `bmad/project.yaml` project level and constraints
 - known business goals and delivery timeline
 
-## Language Output Rules
+## Language Guard (Mandatory)
 
-Resolve document language in this order:
+Enforce language selection separately for chat responses and generated artifacts.
+
+Chat language (`communication_language`) fallback order:
+
+1. `language.communication_language` from `bmad/project.yaml`
+2. `English`
+
+Rules for chat responses:
+
+- Use the resolved chat language for all assistant responses (questions, status updates, summaries, and handoff notes).
+- Do not switch chat language unless the user explicitly requests a different language in the current thread.
+
+Artifact language (`document_output_language`) fallback order:
 
 1. `language.document_output_language` from `bmad/project.yaml`
-2. `language.communication_language` from `bmad/project.yaml`
-3. `English`
+2. `English`
 
-When writing `docs/bmad/prd.md`, `docs/bmad/tech-spec.md`, or `docs/bmad/prioritization.md`:
+Rules for generated artifacts:
 
+- Use the resolved artifact language for all generated BMAD documents and structured artifacts.
 - write prose and field values in the resolved document language
 - avoid mixed-language requirement clauses with English modal verbs (for example, `System shall` followed by non-English text)
 - allow English acronyms/abbreviations in non-English sentences (for example, `API`, `SLA`, `KPI`, `OAuth`, `WCAG`)
 - keep `Given`, `when`, `then` in English as notation tokens and format them in bold (`**Given**`, `**when**`, `**then**`)
 - localize field values such as `Compliance`, `Load Profile`, and `Measurement Method`
+- Keep code snippets, CLI commands, file paths, and identifiers in their original technical form.
 
 ## Mandatory Reference Load
 
