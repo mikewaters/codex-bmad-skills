@@ -26,6 +26,7 @@ yarn-error.log*
 # Environment
 .env
 .env.local
+.venv/
 
 # Build artifacts (in case someone tests locally)
 dist/
