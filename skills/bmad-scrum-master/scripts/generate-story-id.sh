@@ -23,7 +23,7 @@ set -euo pipefail
 # Default values
 PROJECT_NAME="${1:-}"
 STORIES_DIR="${2:-docs/stories}"
-SPRINT_STATUS_FILE=".bmad/sprint-status.yaml"
+SPRINT_STATUS_FILE="bmad/sprint-status.yaml"
 
 # Color codes for output
 RED='\033[0;31m'
@@ -65,7 +65,7 @@ Output:
 
 The script searches for story IDs in:
   1. Story files in the specified directory (*.md files)
-  2. Sprint status YAML file (.bmad/sprint-status.yaml)
+  2. Sprint status YAML file (bmad/sprint-status.yaml)
 
 Exit Codes:
   0 - Success

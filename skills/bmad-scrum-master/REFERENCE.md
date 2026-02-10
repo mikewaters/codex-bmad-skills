@@ -422,7 +422,7 @@ If you need to estimate points per developer-day for a new team:
 
 ### Sprint Status File Structure
 
-Store in `.bmad/sprint-status.yaml`:
+Store in `bmad/sprint-status.yaml`:
 
 ```yaml
 project: project-name

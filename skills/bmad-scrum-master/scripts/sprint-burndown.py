@@ -7,8 +7,8 @@ Outputs data suitable for visualization or analysis.
 
 Usage:
     python sprint-burndown.py <sprint-status-file> [sprint-number]
-    python sprint-burndown.py .bmad/sprint-status.yaml
-    python sprint-burndown.py .bmad/sprint-status.yaml 2
+    python sprint-burndown.py bmad/sprint-status.yaml
+    python sprint-burndown.py bmad/sprint-status.yaml 2
 
 Output formats:
     - Text table (default)
@@ -315,9 +315,9 @@ def main():
     """Main execution function."""
     if len(sys.argv) < 2:
         print("Usage: python sprint-burndown.py <sprint-status-file> [sprint-number] [--csv|--json]")
-        print("Example: python sprint-burndown.py .bmad/sprint-status.yaml")
-        print("Example: python sprint-burndown.py .bmad/sprint-status.yaml 2")
-        print("Example: python sprint-burndown.py .bmad/sprint-status.yaml --csv")
+        print("Example: python sprint-burndown.py bmad/sprint-status.yaml")
+        print("Example: python sprint-burndown.py bmad/sprint-status.yaml 2")
+        print("Example: python sprint-burndown.py bmad/sprint-status.yaml --csv")
         sys.exit(1)
 
     file_path = sys.argv[1]

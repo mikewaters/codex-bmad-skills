@@ -1,5 +1,5 @@
 # Sprint Status Template
-# Store in: .bmad/sprint-status.yaml
+# Store in: bmad/sprint-status.yaml
 # This file tracks sprint progress, velocity, and story status
 
 project: {project-name}
@@ -264,7 +264,7 @@ updated_by: {scrum-master|developer|system}
 # Sprint Status YAML Usage Guide
 
 ## File Location
-Store this file at: `.bmad/sprint-status.yaml`
+Store this file at: `bmad/sprint-status.yaml`
 
 ## Updating Sprint Status
 
@@ -340,12 +340,12 @@ completion_rate = (completed_points / planned_points) * 100
 
 ### Update Velocity
 ```bash
-python scripts/calculate-velocity.py .bmad/sprint-status.yaml
+python scripts/calculate-velocity.py bmad/sprint-status.yaml
 ```
 
 ### Generate Burndown Data
 ```bash
-python scripts/sprint-burndown.py .bmad/sprint-status.yaml
+python scripts/sprint-burndown.py bmad/sprint-status.yaml
 ```
 
 ### Generate Next Story ID

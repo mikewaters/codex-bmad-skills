@@ -11,7 +11,7 @@ Outputs:
 
 Usage:
     python calculate-velocity.py <sprint-status-file>
-    python calculate-velocity.py .bmad/sprint-status.yaml
+    python calculate-velocity.py bmad/sprint-status.yaml
 """
 
 import sys
@@ -229,7 +229,7 @@ def main():
     """Main execution function."""
     if len(sys.argv) != 2:
         print("Usage: python calculate-velocity.py <sprint-status-file>")
-        print("Example: python calculate-velocity.py .bmad/sprint-status.yaml")
+        print("Example: python calculate-velocity.py bmad/sprint-status.yaml")
         sys.exit(1)
 
     file_path = sys.argv[1]
