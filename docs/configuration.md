@@ -52,7 +52,6 @@ Sprint-level plan, story metrics, and velocity-related state.
 
 ## Installer Flags
 
-- `--scope global|local`
-- `--dest <path>`
-- `--project-root <path>` (for local scope)
-- no `both` mode
+- `--dest <path>` (optional)
+- default install path: `$HOME/.agents/skills`
+- use custom path for project-local installs (for example `<project>/.agents/skills`)

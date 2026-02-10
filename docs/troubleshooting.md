@@ -34,9 +34,10 @@ Fix:
 
 Checks:
 
-- project local path exists: `<project>/.agents/skills`
+- global path exists: `~/.agents/skills` (default installer destination)
+- or project local path exists: `<project>/.agents/skills` (if custom `--dest` was used)
 - installed skill folders contain `SKILL.md`
-- `AGENTS.md` exists in project root for local setup
+- restart Codex after installing skills
 
 ## Init Script Fails on Existing Files
 

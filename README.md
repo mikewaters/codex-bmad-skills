@@ -152,40 +152,34 @@ Installer validates both dependencies before install.
 
 ## Install
 
-### Global skills install
+### Install to default global path
 
 ```bash
-./installers/install-codex.sh \
-  --scope global \
-  --dest "$HOME/.agents/skills"
+./installers/install-codex.sh
 ```
 
-### Local (project) skills install
+### Install to custom path (example: project-local)
 
 ```bash
-./installers/install-codex.sh \
-  --scope local \
-  --dest "./.agents/skills" \
-  --project-root "$(pwd)"
+codex-bmad-skills/installers/install-codex.sh --dest "<project>/.agents/skills"
 ```
 
 PowerShell:
 
 ```powershell
-./installers/install-codex.ps1 -Scope global -Dest "$HOME/.agents/skills"
-./installers/install-codex.ps1 -Scope local -Dest ".\.agents\skills" -ProjectRoot (Get-Location)
+codex-bmad-skills/installers/install-codex.ps1
+codex-bmad-skills/installers/install-codex.ps1 -Dest "<project>\.agents\skills"
 ```
 
 Notes:
 
-- `--scope` / `-Scope` is required: `global|local`
-- `--dest` / `-Dest` is required
-- `both` mode is intentionally not supported
+- `--dest` / `-Dest` is optional
+- default destination is `$HOME/.agents/skills`
 - restart Codex after installation so it reloads and sees newly installed skills
 
 ## Initialize BMAD in Project
 
-After local installation, initialize project artifacts:
+After skills installation, initialize project artifacts:
 
 ```bash
 bash skills/bmad-orchestrator/scripts/init-project.sh \

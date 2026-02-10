@@ -28,7 +28,7 @@ This documentation tracks the Codex-first migration path.
 
 - Codex-only branch (no dual-runtime support)
 - no compatibility layer via deprecated custom prompts
-- installer mode is explicit: `--scope global|local` + `--dest`
+- installer destination is configurable with `--dest` (default: `$HOME/.agents/skills`)
 - canonical skill namespace: `skills/bmad-*`
 
 ## Core Intents

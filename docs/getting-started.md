@@ -24,26 +24,24 @@ cd codex-bmad-skills
 
 ## 2. Install Skills
 
-### Global install
+### Install to default global path
 
 ```bash
-./installers/install-codex.sh --scope global --dest "$HOME/.agents/skills"
+codex-bmad-skills/installers/install-codex.sh
 ```
 
-### Local install (recommended per project)
+### Install to custom path (example: project-local)
 
 ```bash
-./installers/install-codex.sh \
-  --scope local \
-  --dest "./.agents/skills" \
-  --project-root "$(pwd)"
+codex-bmad-skills/installers/install-codex.sh \
+  --dest "<project>/.agents/skills"
 ```
 
 PowerShell equivalents:
 
 ```powershell
-./installers/install-codex.ps1 -Scope global -Dest "$HOME/.agents/skills"
-./installers/install-codex.ps1 -Scope local -Dest ".\.agents\skills" -ProjectRoot (Get-Location)
+codex-bmad-skills/installers/install-codex.ps1
+codex-bmad-skills/installers/install-codex.ps1 -Dest "<project>\.agents\skills"
 ```
 
 ## 3. Initialize BMAD Artifacts
@@ -77,8 +75,9 @@ Start with recommended intent from status, then continue by phase:
 - solutioning: `bmad:architecture`
 - implementation: `bmad:sprint-plan` -> `bmad:create-story` -> `bmad:dev-story`
 
-## Scope Rules
+## Installer Parameters
 
-- installer supports only `global|local`
-- `both` is not supported by design
+- `--dest` / `-Dest` is optional
+- default destination is `$HOME/.agents/skills`
+- example custom destination: `<project>/.agents/skills`
 - if same skill exists globally and locally, prefer project-local in this project
