@@ -29,6 +29,23 @@ die() {
   exit 1
 }
 
+expand_dest_path() {
+  local path="$1"
+
+  case "$path" in
+    "~")
+      printf '%s\n' "$HOME"
+      return
+      ;;
+    "~/"*)
+      printf '%s\n' "$HOME/${path#\~/}"
+      return
+      ;;
+  esac
+
+  printf '%s\n' "$path"
+}
+
 check_runtime_requirements() {
   local yq_version
   local python_version
@@ -82,6 +99,7 @@ done
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 check_runtime_requirements
+DEST="$(expand_dest_path "$DEST")"
 
 if [[ -d "$REPO_ROOT/skills" ]]; then
   SOURCE_ROOT="$REPO_ROOT/skills"
