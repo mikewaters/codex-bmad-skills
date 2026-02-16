@@ -1,9 +1,9 @@
 # Product Brief: {{PROJECT_NAME}}
 
-**Date:** {{DATE}}  
-**Author:** {{AUTHOR}}  
-**Status:** {{STATUS}}  
-**Version:** {{VERSION}}
+- **Date:** {{DATE}}
+- **Author:** {{AUTHOR}}
+- **Status:** {{STATUS}}
+- **Version:** {{VERSION}}
 
 ---
 
@@ -439,6 +439,6 @@
 
 ---
 
-**Document Status:** {{FINAL_STATUS}}  
-**Last Updated:** {{LAST_UPDATED}}  
-**Next Review Date:** {{NEXT_REVIEW}}
+- **Document Status:** {{FINAL_STATUS}}
+- **Last Updated:** {{LAST_UPDATED}}
+- **Next Review Date:** {{NEXT_REVIEW}}

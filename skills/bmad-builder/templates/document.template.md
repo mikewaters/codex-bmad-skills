@@ -1,9 +1,9 @@
 # {{Document_Type}}: {{project_name}}
 
-**Date:** {{date}}  
-**Author:** {{author_name}}  
-**Version:** {{version}}  
-**Status:** {{status}}
+- **Date:** {{date}}
+- **Author:** {{author_name}}
+- **Version:** {{version}}
+- **Status:** {{status}}
 
 ---
 
@@ -174,7 +174,7 @@ Based on the analysis in this document:
 
 ---
 
-**Document Classification:** {{classification}}  
-**Confidentiality:** {{confidentiality_level}}
+- **Document Classification:** {{classification}}
+- **Confidentiality:** {{confidentiality_level}}
 
 *End of Document*

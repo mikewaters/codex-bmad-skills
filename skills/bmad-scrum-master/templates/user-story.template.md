@@ -1,10 +1,10 @@
 # {Story Title}
 
-**ID:** STORY-{number}  
-**Epic:** {Epic ID or Epic Name}  
-**Priority:** {Must Have | Should Have | Could Have | Won't Have}  
-**Story Points:** {1 | 2 | 3 | 5 | 8}  
-**Status:** {Not Started | In Progress | In Review | Completed}
+- **ID:** STORY-{number}
+- **Epic:** {Epic ID or Epic Name}
+- **Priority:** {Must Have | Should Have | Could Have | Won't Have}
+- **Story Points:** {1 | 2 | 3 | 5 | 8}
+- **Status:** {Not Started | In Progress | In Review | Completed}
 
 ## User Story
 

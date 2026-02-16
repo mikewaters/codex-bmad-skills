@@ -1,10 +1,10 @@
 # Product Requirements Document (PRD)
 
-**Project Name:** {{PROJECT_NAME}}  
-**Document Version:** {{VERSION}}  
-**Date:** {{DATE}}  
-**Author:** {{AUTHOR}}  
-**Status:** {{STATUS}}
+- **Project Name:** {{PROJECT_NAME}}
+- **Document Version:** {{VERSION}}
+- **Date:** {{DATE}}
+- **Author:** {{AUTHOR}}
+- **Status:** {{STATUS}}
 
 ---
 

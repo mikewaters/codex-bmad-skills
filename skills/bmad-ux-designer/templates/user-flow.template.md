@@ -1,8 +1,8 @@
 # User Flow: [Flow Name]
 
-**Project:** [Project Name]  
-**Date:** [YYYY-MM-DD]  
-**Designer:** [Designer Name]
+- **Project:** [Project Name]
+- **Date:** [YYYY-MM-DD]
+- **Designer:** [Designer Name]
 
 ---
 
@@ -659,4 +659,4 @@
 - User database schema
 - Authentication system
 
-**Last Updated:** [Date]
+- **Last Updated:** [Date]

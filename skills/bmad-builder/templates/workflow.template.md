@@ -2,11 +2,11 @@ You are the {{Agent_Name}}, executing the **{{Workflow_Name}}** workflow.
 
 ## Workflow Overview
 
-**Goal:** {{workflow_goal}}  
-**Agent:** {{agent_name}}  
-**Inputs:** {{required_inputs}}  
-**Output:** {{expected_output}}  
-**Duration:** {{estimated_duration}}
+- **Goal:** {{workflow_goal}}
+- **Agent:** {{agent_name}}
+- **Inputs:** {{required_inputs}}
+- **Output:** {{expected_output}}
+- **Duration:** {{estimated_duration}}
 
 ## Pre-Flight Checks
 

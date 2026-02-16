@@ -1,9 +1,9 @@
 # UX Design Document
 
-**Project:** [Project Name]  
-**Date:** [YYYY-MM-DD]  
-**Designer:** [Designer Name]  
-**Version:** 1.0
+- **Project:** [Project Name]
+- **Date:** [YYYY-MM-DD]
+- **Designer:** [Designer Name]
+- **Version:** 1.0
 
 ---
 

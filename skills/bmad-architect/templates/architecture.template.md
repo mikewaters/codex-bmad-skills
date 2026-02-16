@@ -1,9 +1,9 @@
 # System Architecture: {PROJECT_NAME}
 
-**Document Version:** 1.0  
-**Date:** {DATE}  
-**Author:** System Architect  
-**Status:** Draft | Review | Approved
+- **Document Version:** 1.0
+- **Date:** {DATE}
+- **Author:** System Architect
+- **Status:** Draft | Review | Approved
 
 ---
 

@@ -1,9 +1,9 @@
 # Research Report: {{RESEARCH_TOPIC}}
 
-**Date:** {{DATE}}  
-**Researcher:** {{RESEARCHER}}  
-**Research Type:** {{RESEARCH_TYPE}}  
-**Status:** {{STATUS}}
+- **Date:** {{DATE}}
+- **Researcher:** {{RESEARCHER}}
+- **Research Type:** {{RESEARCH_TYPE}}
+- **Status:** {{STATUS}}
 
 ---
 
@@ -488,6 +488,6 @@
 
 ---
 
-**Report Status:** {{FINAL_STATUS}}  
-**Last Updated:** {{LAST_UPDATED}}  
-**Next Review:** {{NEXT_REVIEW}}
+- **Report Status:** {{FINAL_STATUS}}
+- **Last Updated:** {{LAST_UPDATED}}
+- **Next Review:** {{NEXT_REVIEW}}

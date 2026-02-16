@@ -1,10 +1,10 @@
 # Solutioning Gate Check Report: {PROJECT_NAME}
 
-**Date:** {DATE}  
-**Reviewer:** {REVIEWER}  
-**Architecture Document:** `docs/bmad/architecture.md`  
-**Requirements Document:** `{docs/bmad/prd.md | docs/bmad/tech-spec.md}`  
-**Report Version:** 1.0
+- **Date:** {DATE}
+- **Reviewer:** {REVIEWER}
+- **Architecture Document:** `docs/bmad/architecture.md`
+- **Requirements Document:** `{docs/bmad/prd.md | docs/bmad/tech-spec.md}`
+- **Report Version:** 1.0
 
 ---
 

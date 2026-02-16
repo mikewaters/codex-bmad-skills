@@ -1,10 +1,10 @@
 # Technical Specification
 
-**Project Name:** {{PROJECT_NAME}}  
-**Version:** {{VERSION}}  
-**Date:** {{DATE}}  
-**Author:** {{AUTHOR}}  
-**Status:** {{STATUS}}
+- **Project Name:** {{PROJECT_NAME}}
+- **Version:** {{VERSION}}
+- **Date:** {{DATE}}
+- **Author:** {{AUTHOR}}
+- **Status:** {{STATUS}}
 
 ---
 

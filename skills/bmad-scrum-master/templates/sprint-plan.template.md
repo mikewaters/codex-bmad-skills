@@ -1,9 +1,9 @@
 # Sprint Plan: {Project Name}
 
-**Sprint Number:** {N}  
-**Sprint Dates:** {Start Date} - {End Date}  
-**Sprint Duration:** {X weeks / Y days}  
-**Created:** {Creation Date}
+- **Sprint Number:** {N}
+- **Sprint Dates:** {Start Date} - {End Date}
+- **Sprint Duration:** {X weeks / Y days}
+- **Created:** {Creation Date}
 
 ## Sprint Overview
 
