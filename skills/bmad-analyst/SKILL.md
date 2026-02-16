@@ -74,24 +74,44 @@ Always finish with a recommended next intent (`bmad:prd` or `bmad:tech-spec` in 
 
 ## Core Workflow
 
-1. Identify problem, user segment, impact, urgency, and constraints.
-2. Apply discovery methods (5 Whys, JTBD, SMART).
-3. Build the selected artifact with clear assumptions and measurable outcomes.
-4. Validate artifact completeness and decision readiness.
-5. Provide explicit handoff notes for the next BMAD phase.
+1. For `product-brief`, complete the Mandatory Interview Gate before drafting or updating the brief.
+2. Identify problem, user segment, impact, urgency, and constraints.
+3. Apply discovery methods (5 Whys, JTBD, SMART).
+4. Build the selected artifact with clear assumptions and measurable outcomes.
+5. Validate artifact completeness and decision readiness.
+6. Provide explicit handoff notes for the next BMAD phase.
+
+## Mandatory Interview Gate (`product-brief`)
+
+Before finalizing `docs/bmad/product-brief.md`, complete a chat-native discovery interview.
+
+- Primary channel must be chat Q&A. Do not use shell prompts as the primary interview channel.
+- Ask discovery questions in batches of 3-7, then wait for answers before asking the next batch.
+- Use `resources/interview-frameworks.md` as the interview question bank.
+- Coverage is mandatory for:
+  - problem
+  - users
+  - current workaround
+  - urgency
+  - success metrics
+  - constraints
+  - risks
+  - dependencies
+  - next steps
+- If the user explicitly asks to skip questions, continue only with clearly stated assumptions and ask for explicit confirmation.
+- Do not finalize the brief without either interview answers or explicit user agreement to proceed with assumptions.
 
 ## Script Selection
 
-- Discovery question flow (interactive TTY):
-  ```bash
-  bash scripts/discovery-checklist.sh
-  ```
 - Product brief completeness check:
   ```bash
   bash scripts/validate-brief.sh docs/bmad/product-brief.md
   ```
 
-If the shell is non-interactive, ask structured questions directly instead of running the checklist script.
+## Environment Guidance
+
+- Default behavior for `product-brief`: ask structured questions in chat first, then draft the artifact.
+- Use shell scripts only for artifact validation, not as the primary interview channel.
 
 ## Template Map
 
@@ -112,10 +132,10 @@ For `brainstorm`, use this compact structure:
 ## Reference Map
 
 - `REFERENCE.md`
-- Must read first for interview frameworks and discovery process details.
+- Must read first for workflow context and discovery process details.
 
 - `resources/interview-frameworks.md`
-- Use as a focused question bank for interviews.
+- Use as the focused question bank for the Mandatory Interview Gate.
 
 Load only relevant sections to keep context lean.
 

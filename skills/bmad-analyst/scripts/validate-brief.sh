@@ -209,8 +209,8 @@ else
     echo "Use the product brief template:"
     echo "  templates/product-brief.template.md"
     echo ""
-    echo "Use the discovery checklist for guidance:"
-    echo "  scripts/discovery-checklist.sh"
+    echo "Use the interview framework question bank for guidance:"
+    echo "  resources/interview-frameworks.md"
     echo ""
     exit 1
 fi
