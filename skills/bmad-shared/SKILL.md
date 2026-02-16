@@ -54,9 +54,6 @@ Treat `REFERENCE.md` as required context for state semantics and update rules.
 
 ## YAML Contract Files
 
-- `config.template.yaml`
-- `workflow-status.template.yaml`
-- `sprint-status.template.yaml`
 - `workflows.registry.yaml`
 - `REFERENCE.md`
 - Shared script semantics and state rules.

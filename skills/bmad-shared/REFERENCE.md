@@ -4,9 +4,6 @@ This reference defines shared YAML contracts and script usage for BMAD state ope
 
 ## Files
 
-- `config.template.yaml`
-- `workflow-status.template.yaml`
-- `sprint-status.template.yaml`
 - `workflows.registry.yaml`
 
 ## Script Semantics

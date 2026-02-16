@@ -100,13 +100,14 @@ Shared state helpers are in `../bmad-shared/scripts/`.
 
 ## Template Map
 
-- `templates/config.template.yaml`
-- Why: orchestrator-level config compatibility template.
+- `templates/project.template.yaml`
+- Why: orchestrator-owned project config template used by `init-project.sh`.
 
 - `templates/workflow-status.template.yaml`
-- Why: orchestrator workflow status compatibility template.
+- Why: orchestrator-owned workflow status template used by `init-project.sh`.
 
-Source-of-truth shared templates live in `../bmad-shared/`.
+- `templates/sprint-status.template.yaml`
+- Why: orchestrator-owned sprint status template used by `init-project.sh`.
 
 ## Reference Map
 

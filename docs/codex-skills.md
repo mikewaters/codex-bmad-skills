@@ -18,7 +18,7 @@ keywords: "skills, codex, bmad"
 - `bmad-ux-designer`: UX design and user flow
 - `bmad-creative-intelligence`: ideation and deep research
 - `bmad-builder`: create skill/workflow scaffolds
-- `bmad-shared`: shared YAML templates and state scripts
+- `bmad-shared`: shared YAML state scripts
 
 ## Skill Folder Contract
 

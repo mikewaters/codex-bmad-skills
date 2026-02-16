@@ -20,7 +20,7 @@ keywords: "BMAD skills, Codex skills"
 
 ### `bmad-shared`
 
-- role: shared YAML templates/state helpers
+- role: shared YAML state helpers
 - used by other BMAD skills
 - key scripts:
   - `skills/bmad-shared/scripts/load-project-config.sh`

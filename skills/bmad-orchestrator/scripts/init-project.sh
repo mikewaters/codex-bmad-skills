@@ -93,12 +93,10 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ORCHESTRATOR_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-REPO_ROOT="$(cd "$ORCHESTRATOR_ROOT/../.." && pwd)"
-SHARED_ROOT="$(cd "$ORCHESTRATOR_ROOT/../bmad-shared" && pwd)"
 
-PROJECT_TEMPLATE="$SHARED_ROOT/config.template.yaml"
-WORKFLOW_TEMPLATE="$SHARED_ROOT/workflow-status.template.yaml"
-SPRINT_TEMPLATE="$SHARED_ROOT/sprint-status.template.yaml"
+PROJECT_TEMPLATE="$ORCHESTRATOR_ROOT/templates/project.template.yaml"
+WORKFLOW_TEMPLATE="$ORCHESTRATOR_ROOT/templates/workflow-status.template.yaml"
+SPRINT_TEMPLATE="$ORCHESTRATOR_ROOT/templates/sprint-status.template.yaml"
 
 [[ -f "$PROJECT_TEMPLATE" ]] || { echo "ERROR: template missing: $PROJECT_TEMPLATE" >&2; exit 1; }
 [[ -f "$WORKFLOW_TEMPLATE" ]] || { echo "ERROR: template missing: $WORKFLOW_TEMPLATE" >&2; exit 1; }
