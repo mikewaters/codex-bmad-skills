@@ -2,6 +2,9 @@
 set -euo pipefail
 
 STATUS_FILE="${1:-bmad/workflow-status.yaml}"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ORCHESTRATOR_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+VERSION_FILE="$ORCHESTRATOR_ROOT/version.yaml"
 
 usage() {
   cat <<USAGE
@@ -21,6 +24,20 @@ if ! command -v yq >/dev/null 2>&1; then
   exit 1
 fi
 
+read_codex_bmad_version() {
+  local version="unknown"
+
+  if [[ -f "$VERSION_FILE" ]]; then
+    version="$(yq eval -r '.version // "unknown"' "$VERSION_FILE" 2>/dev/null || true)"
+  fi
+
+  if [[ -z "$version" || "$version" == "null" ]]; then
+    version="unknown"
+  fi
+
+  printf '%s\n' "$version"
+}
+
 if [[ ! -f "$STATUS_FILE" ]]; then
   echo "ERROR: status file not found: $STATUS_FILE" >&2
   echo "Hint: run bmad:init first to create project artifacts."
@@ -33,6 +50,7 @@ current_phase=$(yq eval -r '.current_phase // "unknown"' "$STATUS_FILE")
 progress=$(yq eval -r '.metrics.progress_percentage // 0' "$STATUS_FILE")
 completed=$(yq eval -r '.metrics.completed_workflows // 0' "$STATUS_FILE")
 total=$(yq eval -r '.metrics.total_workflows // 0' "$STATUS_FILE")
+codex_bmad_skills_version="$(read_codex_bmad_version)"
 
 print_workflow() {
   local phase_key="$1"
@@ -56,6 +74,7 @@ print_workflow() {
 }
 
 echo "BMAD Workflow Status"
+echo "codex_bmad_skills_version=${codex_bmad_skills_version}"
 echo "project=${name}"
 echo "level=${level}"
 echo "current_phase=${current_phase}"
@@ -86,7 +105,7 @@ stories_done=$(yq eval '.phases.phase_4_implementation.workflows.stories.complet
 echo "  [ ] stories (${stories_done}/${stories_total} completed)"
 echo ""
 
-SHARED_SCRIPTS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)/bmad-shared/scripts"
+SHARED_SCRIPTS_DIR="$(cd "$ORCHESTRATOR_ROOT/.." && pwd)/bmad-shared/scripts"
 if [[ -x "$SHARED_SCRIPTS_DIR/next-workflow.sh" ]]; then
   next="$($SHARED_SCRIPTS_DIR/next-workflow.sh "$STATUS_FILE" text)"
   echo "$next"

@@ -93,6 +93,23 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ORCHESTRATOR_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+VERSION_FILE="$ORCHESTRATOR_ROOT/version.yaml"
+
+read_codex_bmad_version() {
+  local version="unknown"
+
+  if [[ -f "$VERSION_FILE" ]]; then
+    version="$(sed -nE 's/^version:[[:space:]]*"?([^"[:space:]]+)"?.*$/\1/p' "$VERSION_FILE" | head -n1 || true)"
+  fi
+
+  if [[ -z "$version" ]]; then
+    version="unknown"
+  fi
+
+  printf '%s\n' "$version"
+}
+
+CODEX_BMAD_SKILLS_VERSION="$(read_codex_bmad_version)"
 
 PROJECT_TEMPLATE="$ORCHESTRATOR_ROOT/templates/project.template.yaml"
 WORKFLOW_TEMPLATE="$ORCHESTRATOR_ROOT/templates/workflow-status.template.yaml"
@@ -194,4 +211,5 @@ echo "workflow_status=$WORKFLOW_OUT"
 echo "sprint_status=$SPRINT_OUT"
 echo "communication_language=$COMMUNICATION_LANGUAGE"
 echo "document_output_language=$DOCUMENT_OUTPUT_LANGUAGE"
+echo "codex_bmad_skills_version=$CODEX_BMAD_SKILLS_VERSION"
 echo "next_intent=bmad:status"

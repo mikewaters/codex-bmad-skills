@@ -20,6 +20,97 @@ function Write-Warn([string]$Message) {
     Write-Host "[WARN] $Message" -ForegroundColor Yellow
 }
 
+function Resolve-VersionFromGit([string]$RepoRoot) {
+    $gitCmd = Get-Command git -ErrorAction SilentlyContinue
+    if (-not $gitCmd) {
+        return $null
+    }
+
+    & $gitCmd.Source -C $RepoRoot rev-parse --is-inside-work-tree *> $null
+    if ($LASTEXITCODE -ne 0) {
+        return $null
+    }
+
+    $candidates = @(
+        (& $gitCmd.Source -C $RepoRoot describe --tags --abbrev=0 --match "v[0-9]*" 2>$null | Select-Object -First 1),
+        (& $gitCmd.Source -C $RepoRoot describe --tags --abbrev=0 --match "[0-9]*" 2>$null | Select-Object -First 1),
+        (& $gitCmd.Source -C $RepoRoot tag --list "v[0-9]*" --sort=-v:refname 2>$null | Select-Object -First 1),
+        (& $gitCmd.Source -C $RepoRoot tag --list "[0-9]*" --sort=-v:refname 2>$null | Select-Object -First 1)
+    )
+
+    foreach ($candidate in $candidates) {
+        if ($candidate) {
+            return ($candidate.Trim() -replace '^v', '')
+        }
+    }
+
+    return $null
+}
+
+function Resolve-VersionFromChangelog([string]$RepoRoot) {
+    $changelogPath = Join-Path $RepoRoot "CHANGELOG.md"
+    if (-not (Test-Path $changelogPath)) {
+        return $null
+    }
+
+    foreach ($line in Get-Content -Path $changelogPath) {
+        if ($line -match '^## \[([0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z\.-]+)?)\]') {
+            return $Matches[1]
+        }
+        if ($line -match '^## ([0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z\.-]+)?)') {
+            return $Matches[1]
+        }
+    }
+
+    return $null
+}
+
+function Resolve-CodexBmadVersion([string]$RepoRoot) {
+    $gitVersion = Resolve-VersionFromGit -RepoRoot $RepoRoot
+    if ($gitVersion) {
+        return @{
+            Version = $gitVersion
+            Source = "git"
+        }
+    }
+
+    $changelogVersion = Resolve-VersionFromChangelog -RepoRoot $RepoRoot
+    if ($changelogVersion) {
+        return @{
+            Version = $changelogVersion
+            Source = "changelog"
+        }
+    }
+
+    return @{
+        Version = "0.0.0-unknown"
+        Source = "unknown"
+    }
+}
+
+function Write-CodexVersionFile(
+    [string]$RepoRoot,
+    [string]$Version,
+    [string]$Source,
+    [bool]$DryRunMode
+) {
+    $versionFile = Join-Path $RepoRoot "skills/bmad-orchestrator/version.yaml"
+
+    if ($DryRunMode) {
+        Write-Info "Would write version file: $versionFile (version=$Version source=$Source)"
+        return
+    }
+
+    $timestamp = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+    @(
+        "version: `"$Version`"",
+        "source: `"$Source`"",
+        "updated_at_utc: `"$timestamp`""
+    ) | Set-Content -Path $versionFile -Encoding UTF8
+
+    Write-Ok "Wrote version metadata: $versionFile"
+}
+
 function Test-RuntimeRequirements {
     $yqCmd = Get-Command yq -ErrorAction SilentlyContinue
     if (-not $yqCmd) {
@@ -50,6 +141,9 @@ function Test-RuntimeRequirements {
 $RepoRoot = Split-Path -Parent $PSScriptRoot
 $SkillsSource = Join-Path $RepoRoot "skills"
 Test-RuntimeRequirements
+$versionInfo = Resolve-CodexBmadVersion -RepoRoot $RepoRoot
+Write-Ok "Installable codex-bmad-skills version: $($versionInfo.Version) (source=$($versionInfo.Source))"
+Write-CodexVersionFile -RepoRoot $RepoRoot -Version $versionInfo.Version -Source $versionInfo.Source -DryRunMode $DryRun.IsPresent
 
 if (-not (Test-Path $SkillsSource)) {
     throw "No skill source directory found (expected skills/)"

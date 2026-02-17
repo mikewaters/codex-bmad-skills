@@ -29,6 +29,78 @@ die() {
   exit 1
 }
 
+resolve_version_from_git() {
+  local git_version=""
+
+  if ! command -v git >/dev/null 2>&1; then
+    return 1
+  fi
+
+  if ! git -C "$REPO_ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    return 1
+  fi
+
+  git_version="$(git -C "$REPO_ROOT" describe --tags --abbrev=0 --match 'v[0-9]*' 2>/dev/null | head -n1 || true)"
+  if [[ -z "$git_version" ]]; then
+    git_version="$(git -C "$REPO_ROOT" describe --tags --abbrev=0 --match '[0-9]*' 2>/dev/null | head -n1 || true)"
+  fi
+  if [[ -z "$git_version" ]]; then
+    git_version="$(git -C "$REPO_ROOT" tag --list 'v[0-9]*' --sort=-v:refname | head -n1 || true)"
+  fi
+  if [[ -z "$git_version" ]]; then
+    git_version="$(git -C "$REPO_ROOT" tag --list '[0-9]*' --sort=-v:refname | head -n1 || true)"
+  fi
+
+  [[ -n "$git_version" ]] || return 1
+  printf '%s\n' "${git_version#v}"
+}
+
+resolve_version_from_changelog() {
+  local changelog="$REPO_ROOT/CHANGELOG.md"
+  local changelog_version=""
+
+  [[ -f "$changelog" ]] || return 1
+
+  changelog_version="$(sed -nE 's/^## \[([0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?)\].*$/\1/p' "$changelog" | head -n1 || true)"
+  if [[ -z "$changelog_version" ]]; then
+    changelog_version="$(sed -nE 's/^## ([0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?).*/\1/p' "$changelog" | head -n1 || true)"
+  fi
+
+  [[ -n "$changelog_version" ]] || return 1
+  printf '%s\n' "$changelog_version"
+}
+
+resolve_codex_bmad_version() {
+  if CODEX_BMAD_VERSION="$(resolve_version_from_git)"; then
+    CODEX_BMAD_VERSION_SOURCE="git"
+  elif CODEX_BMAD_VERSION="$(resolve_version_from_changelog)"; then
+    CODEX_BMAD_VERSION_SOURCE="changelog"
+  else
+    CODEX_BMAD_VERSION="0.0.0-unknown"
+    CODEX_BMAD_VERSION_SOURCE="unknown"
+  fi
+}
+
+write_codex_version_file() {
+  local version_file="$REPO_ROOT/skills/bmad-orchestrator/version.yaml"
+  local timestamp
+
+  timestamp="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+
+  if [[ "$DRY_RUN" -eq 1 ]]; then
+    log INFO "Would write version file: $version_file (version=$CODEX_BMAD_VERSION source=$CODEX_BMAD_VERSION_SOURCE)"
+    return
+  fi
+
+  cat > "$version_file" <<EOF
+version: "$CODEX_BMAD_VERSION"
+source: "$CODEX_BMAD_VERSION_SOURCE"
+updated_at_utc: "$timestamp"
+EOF
+
+  log OK "Wrote version metadata: $version_file"
+}
+
 expand_dest_path() {
   local path="$1"
 
@@ -71,6 +143,8 @@ check_runtime_requirements() {
 DEST="${HOME}/.agents/skills"
 FORCE=0
 DRY_RUN=0
+CODEX_BMAD_VERSION=""
+CODEX_BMAD_VERSION_SOURCE=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -106,6 +180,10 @@ if [[ -d "$REPO_ROOT/skills" ]]; then
 else
   die "No skill source directory found (expected skills/)"
 fi
+
+resolve_codex_bmad_version
+log OK "Installable codex-bmad-skills version: $CODEX_BMAD_VERSION (source=$CODEX_BMAD_VERSION_SOURCE)"
+write_codex_version_file
 
 SKILL_DIRS=()
 for d in "$SOURCE_ROOT"/*; do
