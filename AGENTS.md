@@ -33,6 +33,8 @@ Use these intent IDs in prompts:
 - Do not use deprecated custom prompts as a compatibility layer.
 - Prefer project-local skills over global when names collide.
 - Keep workflow state explicit in YAML files under `<project>/bmad/`.
+- Enforce skills path isolation: any script, template, or referenced resource used by `skills/*` must remain within the `skills/` tree.
+- Skills under `skills/*` must not read, import, execute, or reference paths outside `skills/` (for example `../installers`, `../docs`, or any parent path escape).
 
 ## Language Settings
 
