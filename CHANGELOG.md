@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.3.0] - 2026-02-17
+
+### Added
+- Added release and commit conventions to `AGENTS.md`, including SemVer tag/title formats and Conventional Commit requirements.
+
+### Changed
+- Updated cross-platform installers (`installers/install-codex.sh`, `installers/install-codex.ps1`) to resolve installable `codex-bmad-skills` version from Git tags, with fallback to `CHANGELOG.md` when Git metadata is unavailable.
+- Updated installers to print the resolved installable version and persist it to `skills/bmad-orchestrator/version.yaml` during installation.
+- Updated orchestrator scripts (`skills/bmad-orchestrator/scripts/init-project.sh`, `skills/bmad-orchestrator/scripts/show-status.sh`) to display `codex_bmad_skills_version` from orchestrator-local `version.yaml`.
+
+---
+
 ## [1.2.0] - 2026-02-17
 
 ### Changed
@@ -71,6 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial adaptation baseline for OpenAI Codex.
 - Project foundation based on [aj-geddes/claude-code-bmad-skills](https://github.com/aj-geddes/claude-code-bmad-skills).
 
+[1.3.0]: https://github.com/xmm/codex-bmad-skills/releases/tag/v1.3.0
 [1.2.0]: https://github.com/xmm/codex-bmad-skills/releases/tag/v1.2.0
 [1.1.0]: https://github.com/xmm/codex-bmad-skills/releases/tag/v1.1.0
 [1.0.0]: https://github.com/xmm/codex-bmad-skills/releases/tag/v1.0.0
