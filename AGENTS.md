@@ -48,3 +48,15 @@ Fallback order:
 1. `language.document_output_language`
 2. `language.communication_language`
 3. `"English"`
+
+## Release and Commit Conventions
+
+- Release tag format: `vMAJOR.MINOR.PATCH` (Semantic Versioning), optional pre-release suffix: `-rc.N` (for example: `v1.4.0-rc.1`).
+- Release title format: `vMAJOR.MINOR.PATCH — <Title Case Summary>`.
+- Accepted release title examples:
+  - `v1.1.0 — Chat-Native Discovery Gate for Product Brief`
+  - `v1.2.0 — Intent-Driven Onboarding & Skill Isolation`
+- Before running release creation (`gh release create` / `git create release`), update `CHANGELOG.md` in `main` with all changes made since the previous release.
+- Commit message format: Conventional Commits: `<type>(<scope>): <subject>`.
+- Allowed commit types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `ci`, `build`, `perf`, `revert`.
+- Keep the subject in imperative mood, lowercase start, and without a trailing period (for example: `feat(skills): add bmad status validator`).
