@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] - 2026-02-17
+
+### Changed
+- Moved project initialization templates (`project.template.yaml`, `workflow-status.template.yaml`, `sprint-status.template.yaml`) under `skills/bmad-orchestrator/templates/` and updated `init-project.sh` to consume orchestrator-local templates.
+- Replaced the legacy compatibility workflow-status template with the structured phase/workflow schema used by current orchestrator initialization.
+- Updated docs to clarify that `bmad-shared` now focuses on shared YAML state helpers and registry data, not initialization templates.
+- Updated onboarding docs (`README.md`, `docs/getting-started.md`) to use the Codex intent workflow (`bmad:init`, `bmad:status`, `bmad:next`) instead of direct script invocation examples.
+- Updated `docs/getting-started.md` examples to include explicit init parameters (`type`, `level`) and switched long sample outputs to collapsible `<details>` blocks for readability.
+- Added AGENTS policy guardrails that enforce `skills/*` path isolation and forbid cross-tree references from skill assets/scripts.
+
+### Fixed
+- Hardened `skills/bmad-analyst/scripts/validate-brief.sh` for non-interactive runs by making `clear` non-fatal and replacing arithmetic post-increment that could trigger early exit under `set -e`.
+- Hardened `skills/bmad-architect/scripts/validate-architecture.sh` under `set -euo pipefail`; counters now increment safely and checks aggregate complete output before the final verdict.
+
+### Removed
+- Removed obsolete compatibility template `skills/bmad-orchestrator/templates/config.template.yaml`.
+- Removed `skills/bmad-shared/workflow-status.template.yaml` after template ownership was consolidated under `bmad-orchestrator`.
+
+---
+
 ## [1.1.0] - 2026-02-16
 
 ### Changed
@@ -51,5 +71,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial adaptation baseline for OpenAI Codex.
 - Project foundation based on [aj-geddes/claude-code-bmad-skills](https://github.com/aj-geddes/claude-code-bmad-skills).
 
+[1.2.0]: https://github.com/xmm/codex-bmad-skills/releases/tag/v1.2.0
 [1.1.0]: https://github.com/xmm/codex-bmad-skills/releases/tag/v1.1.0
 [1.0.0]: https://github.com/xmm/codex-bmad-skills/releases/tag/v1.0.0
