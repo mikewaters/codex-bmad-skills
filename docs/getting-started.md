@@ -122,18 +122,11 @@ codex --cd <project>/
 ### Initialize a project with parameters
 
 ```codex
-› bmad:init --force with name "My Project" and both communication and document output languages set to German
+› bmad:init --force with name "My Project" and both communication and document output languages set to German type=mobile, level=2
 ```
 
-#### Codex CLI output:
-
-<div style="max-height: 300px; overflow-y: auto;
-  background-color: #808080;
-  padding: 12px;
-  border-radius: 12px;
-  font-family: monospace;
-  font-size: 14px;
-">
+<details>
+<summary>Codex output (click to expand).</summary>
 
 ```bash
 • I’m using the bmad-orchestrator skill again for bmad:init. I’ll read the required reference, pull the current
@@ -179,7 +172,7 @@ codex --cd <project>/
   - next_intent=bmad:product-brief
   - Grund: Phase 1 ist noch nicht abgeschlossen.
 ```
-</div>
+</details>
 
 #### Generated files:
 
@@ -195,17 +188,10 @@ codex --cd <project>/
 › bmad:status
 ```
 
-#### Codex CLI output:
-
 It uses the language selected in the previous step.
 
-<div style="max-height: 300px; overflow-y: auto;
-  background-color: #808080;
-  padding: 12px;
-  border-radius: 12px;
-  font-family: monospace;
-  font-size: 14px;
-">
+<details>
+<summary>Codex output (click to expand).</summary>
 
 ```bash
 
@@ -236,7 +222,7 @@ It uses the language selected in the previous step.
   - bmad:product-brief
   - Grund: Phase-1-Basis ist noch unvollständig.
 ```
-</div>
+</details>
 
 ## 5. Run Phase Intents
 

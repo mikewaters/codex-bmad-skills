@@ -181,16 +181,20 @@ Notes:
 - default destination is `$HOME/.agents/skills`
 - restart Codex after installation so it reloads and sees newly installed skills
 
-## Initialize BMAD in Project
+## Run Codex and Initialize BMAD in Project
 
-After skills installation, initialize project artifacts:
+After skills installation, run Codex application (CLI, Desktop) and initialize project artifacts:
 
 ```bash
-bash skills/bmad-orchestrator/scripts/init-project.sh \
-  --name "My Project" \
-  --type web-app \
-  --level 2
+codex
 ```
+
+### Initialize a project
+
+```codex
+› bmad:init name "My Project" communication language is Swedish documentation language is English
+```
+
 
 This creates:
 
@@ -202,9 +206,9 @@ This creates:
 
 ## Check Status and Next Action
 
-```bash
-bash skills/bmad-orchestrator/scripts/show-status.sh bmad/workflow-status.yaml
-bash skills/bmad-orchestrator/scripts/recommend-next.sh bmad/workflow-status.yaml
+```codex
+bmad:status
+bmad:next
 ```
 
 ## BMAD Intent IDs
