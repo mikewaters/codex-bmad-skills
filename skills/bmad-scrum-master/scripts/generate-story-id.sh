@@ -73,6 +73,42 @@ Exit Codes:
 EOF
 }
 
+# Extract project name from sprint status YAML.
+# Supports both:
+#   project: my-project
+#   project:
+#     name: my-project
+extract_project_name() {
+    local file="$1"
+    local project_name=""
+
+    if command -v yq >/dev/null 2>&1; then
+        project_name=$(yq -r '.project.name // .project // .project_name // ""' "$file" 2>/dev/null || true)
+        if [[ "$project_name" == "null" ]]; then
+            project_name=""
+        fi
+    fi
+
+    if [[ -z "$project_name" ]]; then
+        project_name=$(grep -E "^project:[[:space:]]*[^[:space:]].*$" "$file" | head -1 | sed 's/project:[[:space:]]*//' | tr -d '"' || true)
+    fi
+
+    if [[ -z "$project_name" ]]; then
+        project_name=$(awk '
+            /^project:[[:space:]]*$/ { in_project=1; next }
+            in_project && /^[[:space:]]+name:[[:space:]]*/ {
+                sub(/^[[:space:]]+name:[[:space:]]*/, "", $0)
+                gsub(/"/, "", $0)
+                print
+                exit
+            }
+            in_project && /^[^[:space:]]/ { in_project=0 }
+        ' "$file")
+    fi
+
+    echo "$project_name"
+}
+
 # Parse arguments
 if [[ "${1:-}" == "-h" ]] || [[ "${1:-}" == "--help" ]]; then
     usage
@@ -82,7 +118,7 @@ fi
 # Get project name from sprint status if not provided
 if [[ -z "$PROJECT_NAME" ]]; then
     if [[ -f "$SPRINT_STATUS_FILE" ]]; then
-        PROJECT_NAME=$(grep -E "^project:" "$SPRINT_STATUS_FILE" | head -1 | sed 's/project:[[:space:]]*//' | tr -d '"')
+        PROJECT_NAME=$(extract_project_name "$SPRINT_STATUS_FILE")
         if [[ -z "$PROJECT_NAME" ]]; then
             error "Could not extract project name from $SPRINT_STATUS_FILE"
             exit 1

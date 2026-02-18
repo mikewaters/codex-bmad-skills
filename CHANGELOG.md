@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.3.1] - 2026-02-18
+
+### Fixed
+- Fixed `skills/bmad-scrum-master/scripts/generate-story-id.sh` to extract project names from both flat (`project: my-project`) and nested (`project.name`) `bmad/sprint-status.yaml` schemas, preventing false failures on orchestrator-generated files.
+
+---
+
 ## [1.3.0] - 2026-02-17
 
 ### Added
@@ -83,6 +90,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial adaptation baseline for OpenAI Codex.
 - Project foundation based on [aj-geddes/claude-code-bmad-skills](https://github.com/aj-geddes/claude-code-bmad-skills).
 
+[1.3.1]: https://github.com/xmm/codex-bmad-skills/releases/tag/v1.3.1
 [1.3.0]: https://github.com/xmm/codex-bmad-skills/releases/tag/v1.3.0
 [1.2.0]: https://github.com/xmm/codex-bmad-skills/releases/tag/v1.2.0
 [1.1.0]: https://github.com/xmm/codex-bmad-skills/releases/tag/v1.1.0
